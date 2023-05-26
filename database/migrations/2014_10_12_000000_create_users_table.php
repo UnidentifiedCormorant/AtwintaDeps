@@ -17,8 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('image')->nullable()->default(null);
+            $table->longText('about')->nullable()->default(null);
+            $table->string('type')->nullable()->default(null);
+            $table->string('github')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
+            $table->string('phone')->nullable()->default(null);
+            $table->string('birthday')->nullable()->default(null);
+            $table->string('telegram')->nullable()->default(null);
+            $table->string('adopted_at')->nullable()->default(null);
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
