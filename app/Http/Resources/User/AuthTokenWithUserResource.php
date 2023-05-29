@@ -2,13 +2,13 @@
 
 namespace App\Http\Resources\User;
 
-use App\Domain\Entity\RegisterEntity;
+use App\Domain\Entity\EnterEntity;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin RegisterEntity
+ * @mixin EnterEntity
  */
-class RegisterResource extends JsonResource
+class AuthTokenWithUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

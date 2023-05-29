@@ -4,7 +4,7 @@ namespace App\Domain\Entity;
 
 use App\Models\User;
 
-class RegisterEntity
+class EnterEntity
 {
     public function __construct(
         public User $user,

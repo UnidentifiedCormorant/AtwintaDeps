@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\User;
 
-use App\Domain\Entity\RegisterEntity;
+use App\Domain\Entity\EnterEntity;
 use App\Domain\Enum\Type;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
