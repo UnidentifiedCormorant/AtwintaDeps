@@ -19,8 +19,9 @@ class RegisterResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'token' => $this->token
-            //TODO: Добавить ресурс для пользователя
+            'token' => $this->token,
+            'user' => new UserResource($this->user),
+            'password' => $this->user->password
         ];
     }
 }

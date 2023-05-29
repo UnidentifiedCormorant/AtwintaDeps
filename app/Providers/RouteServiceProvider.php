@@ -48,5 +48,11 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+
+        RateLimiter::for('restrictRegisters', function (Request $request) {
+            return Limit::perHour(1000)->response(function () {
+                return response('Слишком много пользователей было зарегистрировано за последний час', 408); //TODO: здесь кастомный эксепшн
+            });
+        });
     }
 }

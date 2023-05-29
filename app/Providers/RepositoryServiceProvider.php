@@ -2,18 +2,18 @@
 
 namespace App\Providers;
 
-use App\Services\Interfaces\UserServiceInterface;
-use App\Services\UserService;
+use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\UserEloquent;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     public array $bindings = [
-        UserServiceInterface::class => UserService::class,
+        UserRepositoryInterface::class => UserEloquent::class,
     ];
 
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */

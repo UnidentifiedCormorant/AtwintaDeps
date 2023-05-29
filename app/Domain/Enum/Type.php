@@ -4,14 +4,14 @@ namespace App\Domain\Enum;
 
 enum Type: string
 {
-    const Front = 'front';
-    const Back = 'back';
+    case FRONT = 'front';
+    case BACK = 'back';
 
-//    public function title(): string
+//    public function title(): int
 //    {
 //        return match ($this) {
-//            Type::Front => 'back',
-//            Type::Back => 'front',
+//            Type::FRONT => 1,
+//            Type::BACK => 2,
 //        };
 //    }
 }

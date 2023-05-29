@@ -7,6 +7,7 @@ use App\Domain\Entity\RegisterEntity;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
 {
@@ -19,7 +20,14 @@ class UserService implements UserServiceInterface
     public function store(RegisterData $data): RegisterEntity
     {
         $user = $this->userRepository->create([
-            //TODO: Дописать создание пользователя
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+            'type' => $data->type->value,
+            'github' => $data->github,
+            'city' => $data->city,
+            'phone' => $data->phone,
+            'birthday' => $data->birthday
         ]);
 
         Auth::login($user);

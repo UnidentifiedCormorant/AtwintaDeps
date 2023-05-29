@@ -24,5 +24,5 @@ Route::get('check', function () {
 });
 
 Route::prefix('auth')->group(function () {
-    Route::post('register', [AuthController::class, 'register']);
+    Route::post('register', [AuthController::class, 'register'])->middleware('throttle:restrictRegisters');
 });

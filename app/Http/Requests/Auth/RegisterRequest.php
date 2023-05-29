@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Domain\Enum\Type;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class RegisterRequest extends FormRequest
 {
@@ -25,13 +27,20 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required', //TODO: На правило валидации 'required|unique:users,email' срака которая insomnia выбрасывает 405 мол этот метод должен быть POST А ОН И ЕСТЬ БЛЯТЬ POST
             'password' => 'required',
-            'type' => 'required',
+            'type' => 'string',
             'github' => 'string',
             'city' => 'string',
             'phone' => 'string',
             'birthday' => 'string'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.unique' => 'fuck'
         ];
     }
 }

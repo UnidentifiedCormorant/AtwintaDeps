@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        //TODO: добавить в новой миграции is_finished
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
