@@ -16,6 +16,7 @@ class PositionFactory extends Factory
         return [
             'title' => fake()->title(),
             'user_id' => User::get()->random()->id,
+            'department_id' => Department::get()->random()->id,
         ];
     }
 }

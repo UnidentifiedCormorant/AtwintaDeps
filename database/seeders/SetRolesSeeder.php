@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,8 @@ class SetRolesSeeder extends Seeder
 
         foreach ($users as $user){
             $user->roles()->attach(3);
+            $user->position_id = Position::get()->random()->id;
+            $user->save();
         }
     }
 }

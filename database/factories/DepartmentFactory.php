@@ -14,7 +14,6 @@ class DepartmentFactory extends Factory
     {
         return [
             'title' => fake()->title(),
-            'position_id' => Position::get()->random()
         ];
     }
 }

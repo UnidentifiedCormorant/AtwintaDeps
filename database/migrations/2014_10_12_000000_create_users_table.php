@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('telegram')->nullable()->default(null);
             $table->string('adopted_at')->nullable()->default(null);
 
+            $table->unsignedBigInteger('position_id')->nullable()->default(null);
+
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

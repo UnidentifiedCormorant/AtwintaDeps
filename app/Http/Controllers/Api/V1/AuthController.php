@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Domain\DTO\AuthData;
 use App\Domain\DTO\RegisterData;
+use App\Domain\DTO\RestoreConfirmData;
+use App\Domain\DTO\RestoreResponseData;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\AuthRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\RestoreConfirmRequest;
 use App\Http\Resources\User\AuthTokenWithUserResource;
 use App\Services\Interfaces\UserServiceInterface;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -39,10 +45,10 @@ class AuthController extends Controller
      * Авторизует пользователя
      * TODO: Сделать проверку на ПОЛЬЗОВАТЕЛЬ НЕ ПОДТВЕРДИЛ ПОЧТУ
      *
-     * @param AuthRequest $request
+     * @param LoginRequest $request
      * @return AuthTokenWithUserResource
      */
-    public function auth(AuthRequest $request): AuthTokenWithUserResource
+    public function auth(LoginRequest $request): AuthTokenWithUserResource
     {
         $data = AuthData::create(
             $request->validated()
@@ -50,5 +56,33 @@ class AuthController extends Controller
 
         $user = $this->userService->auth($data);
         return new AuthTokenWithUserResource($user);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function restore(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return new JsonResponse([
+            'message' => 'Запрос был отправлен'
+        ], 201);
+    }
+
+    public function confirmRestoredPassword(RestoreConfirmRequest $request)
+    {
+        $data = RestoreConfirmData::create(
+            $request->validated()
+        );
+
+        $this->userService->restorePassword($data);
+
+        dd($data);
     }
 }

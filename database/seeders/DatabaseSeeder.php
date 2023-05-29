@@ -19,13 +19,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(50)->create();
-        Position::factory(35)->create();
         Department::factory(10)->create();
+        Position::factory(35)->create();
 
         User::factory()->create([
             'name' => 'Lullen Lullenium',
             'email' => '123',
-            'password' => '123',
+            'password' => \Hash::make('123'),
+            'position_id' => Position::get()->random()->id,
         ]);
 
         $this->call([
